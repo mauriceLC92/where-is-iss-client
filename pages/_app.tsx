@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="description" content="Track the ISS" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Header />
             <Component {...pageProps} />
         </>
     );

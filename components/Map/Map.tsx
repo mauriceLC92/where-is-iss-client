@@ -6,7 +6,11 @@ interface MapProps {
     zoom: number;
 }
 
-const AnyReactComponent = ({ text }: { text: string }) => <div>{text}</div>;
+const Satellite = () => (
+    <span className="text-4xl" role="img" aria-label="map">
+        🛰️
+    </span>
+);
 
 export const Map = ({ lat, lng, zoom }: MapProps) => {
     const [draggable] = useState(true);
@@ -26,7 +30,7 @@ export const Map = ({ lat, lng, zoom }: MapProps) => {
             yesIWantToUseGoogleMapApiInternals
             defaultZoom={zoom}
         >
-            <AnyReactComponent text="My Marker" />
+            <Satellite />
         </GoogleMapReact>
     );
 };

@@ -1,4 +1,5 @@
 import { Map } from '../components/Map/Map';
+import { Header } from '../components/Header/Header';
 import { MapContainer } from '../components/Map/MapContainer';
 import { MapLoading } from '../components/Map/MapLoading';
 import { useCurrentCoordinates } from '../hooks/useCurrentCoordinates';
@@ -14,6 +15,7 @@ export default function Home() {
     const hasLngAndLat = latitude && longitude;
     return (
         <div className="bg-blue-100 h-screen">
+            <Header />
             <main className="flex justify-center">
                 <MapContainer>
                     {hasLngAndLat ? (

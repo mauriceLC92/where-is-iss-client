@@ -1,7 +1,7 @@
 export const Header = () => {
     return (
-        <header className="App-header">
-            <div className="bg-blue-100 flex justify-center flex-col items-center">
+        <header>
+            <div className="bg-blue-100 flex justify-center flex-col items-center pt-4">
                 <div>
                     <h1 className="text-6xl text-center">
                         Where Is ISS{' '}
@@ -18,7 +18,7 @@ export const Header = () => {
                     <p className="text-xl leading-tight tracking-wide mb-4">
                         Check the <span className="font-bold">direction</span>{' '}
                         and <span className="font-bold">distance</span> of the
-                        ISS from you current location{' '}
+                        ISS from you current location.{' '}
                     </p>
                 </div>
             </div>
