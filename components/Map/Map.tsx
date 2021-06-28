@@ -1,21 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
+
 interface MapProps {
-    lat: number;
-    lng: number;
+    myLatitude: number;
+    myLongitude: number;
+    satelliteLatitude: number;
+    satelliteLongitude: number;
     zoom: number;
 }
 
-const Satellite = () => (
+const Satellite = ({ lat, lng }: { lat: number; lng: number }) => (
     <span className="text-4xl" role="img" aria-label="map">
         🛰️
     </span>
 );
 
-export const Map = ({ lat, lng, zoom }: MapProps) => {
-    const [draggable] = useState(true);
-    const [latitude, setLatitude] = useState(lat);
-    const [longitude, setLongitude] = useState(lng);
+const MyLocation = ({ lat, lng }: { lat: number; lng: number }) => (
+    <span className="text-4xl" role="img" aria-label="map">
+        📍
+    </span>
+);
+
+export const Map = ({
+    myLatitude,
+    myLongitude,
+    zoom,
+    satelliteLongitude,
+    satelliteLatitude,
+}: MapProps) => {
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
+
+    useEffect(() => {
+        setLatitude(satelliteLatitude);
+        setLongitude(satelliteLongitude);
+    }, [satelliteLatitude, satelliteLongitude]);
 
     return (
         <GoogleMapReact
@@ -30,7 +49,8 @@ export const Map = ({ lat, lng, zoom }: MapProps) => {
             yesIWantToUseGoogleMapApiInternals
             defaultZoom={zoom}
         >
-            <Satellite />
+            <Satellite lat={latitude} lng={longitude} />
+            <MyLocation lat={myLatitude} lng={myLongitude} />
         </GoogleMapReact>
     );
 };
