@@ -6,10 +6,7 @@ import { MapContainer } from '../components/Map/MapContainer';
 import { MapLoading } from '../components/Map/MapLoading';
 import { useCurrentCoordinates } from '../hooks/useCurrentCoordinates';
 import { InformationBarContainer } from '../components/InformationBar/InformationBarContainer';
-import {
-    CurrentLocation,
-    CURRENT_LOCATION,
-} from '../components/CurrentLocation';
+import { LocationData, CURRENT_LOCATION } from '../components/CurrentLocation';
 import { ClientOnly } from '../components/ClientOnly';
 
 export default function Home() {
@@ -19,7 +16,7 @@ export default function Home() {
         error: myCoordinatesError,
     } = useCurrentCoordinates();
     const { data, loading, error } = useQuery(CURRENT_LOCATION, {
-        pollInterval: 5000,
+        // pollInterval: 5000,
     });
 
     const currentLongitude =
@@ -27,14 +24,13 @@ export default function Home() {
     const currentLatitude =
         !loading && data && data.currentLocation.issPosition.latitude;
 
-    if (error) {
+    if (myCoordinatesError) {
         console.error(
             'geolocation is not enabled on this browser, please enable and reload the page'
         );
     }
 
-    // need to fix this
-    const hasLngAndLat = latitude && longitude;
+    const hasLngAndLat = currentLongitude && currentLatitude;
     return (
         <div className="bg-blue-100 h-screen">
             <Header />
@@ -54,9 +50,12 @@ export default function Home() {
                 </MapContainer>
 
                 <InformationBarContainer>
-                    <ClientOnly>
-                        <CurrentLocation />
-                    </ClientOnly>
+                    <LocationData
+                        satelliteLatitude={parseFloat(currentLatitude)}
+                        satelliteLongitude={parseFloat(currentLongitude)}
+                        myLatitude={latitude}
+                        myLongitude={longitude}
+                    />
                 </InformationBarContainer>
             </main>
         </div>

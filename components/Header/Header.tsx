@@ -18,7 +18,7 @@ export const Header = () => {
                     <p className="text-xl leading-tight tracking-wide mb-4">
                         Check the <span className="font-bold">direction</span>{' '}
                         and <span className="font-bold">distance</span> of the
-                        ISS from you current location.{' '}
+                        ISS from your current location.{' '}
                     </p>
                 </div>
             </div>
