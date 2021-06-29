@@ -1,18 +1,4 @@
-import { gql } from '@apollo/client';
 import { getDistance, convertDistance, getCompassDirection } from 'geolib';
-
-export const CURRENT_LOCATION = gql`
-    query CurrentLocation {
-        currentLocation {
-            message
-            timestamp
-            issPosition {
-                latitude
-                longitude
-            }
-        }
-    }
-`;
 
 interface ILocationData {
     satelliteLatitude: number;

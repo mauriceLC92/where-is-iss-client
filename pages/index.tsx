@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { Map } from '../components/Map/Map';
 import { Header } from '../components/Header/Header';
@@ -6,7 +6,9 @@ import { MapContainer } from '../components/Map/MapContainer';
 import { MapLoading } from '../components/Map/MapLoading';
 import { useCurrentCoordinates } from '../hooks/useCurrentCoordinates';
 import { InformationBarContainer } from '../components/InformationBar/InformationBarContainer';
-import { LocationData, CURRENT_LOCATION } from '../components/CurrentLocation';
+import { LocationData } from '../components/CurrentLocation';
+import { useInterval } from '../hooks/useInterval';
+import { ADD_LOCATION, CURRENT_LOCATION } from '../graphql-queries/queries';
 
 export default function Home() {
     const {
@@ -17,7 +19,10 @@ export default function Home() {
     const { data, loading, error } = useQuery(CURRENT_LOCATION, {
         pollInterval: 5000,
     });
-
+    const [addLocation, { data: mutationData }] = useMutation(ADD_LOCATION);
+    useInterval(() => {
+        addLocation();
+    }, 5000);
     const currentLongitude =
         !loading && data && data.currentLocation.issPosition.longitude;
     const currentLatitude =
