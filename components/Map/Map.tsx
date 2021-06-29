@@ -37,7 +37,7 @@ export const Map = ({
     satelliteLatitude,
 }: MapProps) => {
     const { data, loading, error } = useQuery(LAST_HOUR_LOCATIONS, {
-        pollInterval: 3600 * 1000,
+        pollInterval: 5000,
     });
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
