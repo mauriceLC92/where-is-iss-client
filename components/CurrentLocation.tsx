@@ -48,12 +48,12 @@ export const LocationData = ({
                 longitude={myLongitude}
             />
             <div>
-                <h3 className="text-lg font-extrabold mb-4">
+                <h3 className="text-lg font-extrabold mb-4 underline">
                     Relative to your position: 🧭
                 </h3>
                 <div>
                     <span className="font-bold">Distance (Km):</span>{' '}
-                    {convertDistance(relativeDistance, 'km')}{' '}
+                    {convertDistance(relativeDistance, 'km').toFixed(0)}{' '}
                 </div>
                 <div>
                     <span className="font-bold">Direction:</span>{' '}
@@ -77,12 +77,14 @@ const LocationDataItem = ({
 }: ILocationDataItem) => {
     return (
         <div>
-            <h3 className="text-lg font-extrabold mb-4">{title}</h3>
+            <h3 className="text-lg font-extrabold mb-4 underline">{title}</h3>
             <div>
-                <span className="font-bold">Latitude:</span> {longitude}{' '}
+                <span className="font-bold">Latitude:</span>{' '}
+                {longitude.toPrecision(4)}{' '}
             </div>
             <div>
-                <span className="font-bold">Longitude:</span> {latitude}{' '}
+                <span className="font-bold">Longitude:</span>{' '}
+                {latitude.toPrecision(4)}{' '}
             </div>
         </div>
     );

@@ -37,7 +37,7 @@ export default function Home() {
                 <MapContainer>
                     {hasSatelliteLngAndLat ? (
                         <Map
-                            zoom={8}
+                            zoom={4}
                             myLongitude={longitude}
                             myLatitude={latitude}
                             satelliteLatitude={parseFloat(currentLatitude)}
