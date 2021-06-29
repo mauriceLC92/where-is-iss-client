@@ -29,13 +29,13 @@ export default function Home() {
         );
     }
 
-    const hasLngAndLat = currentLongitude && currentLatitude;
+    const hasSatelliteLngAndLat = currentLongitude && currentLatitude;
     return (
         <div className="bg-blue-100 h-screen">
             <Header />
             <main className="flex justify-center">
                 <MapContainer>
-                    {hasLngAndLat ? (
+                    {hasSatelliteLngAndLat ? (
                         <Map
                             zoom={8}
                             myLongitude={longitude}
@@ -49,7 +49,7 @@ export default function Home() {
                 </MapContainer>
 
                 <InformationBarContainer>
-                    {latitude && longitude && (
+                    {hasSatelliteLngAndLat && (
                         <LocationData
                             satelliteLatitude={parseFloat(currentLatitude)}
                             satelliteLongitude={parseFloat(currentLongitude)}
