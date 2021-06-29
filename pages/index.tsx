@@ -7,7 +7,6 @@ import { MapLoading } from '../components/Map/MapLoading';
 import { useCurrentCoordinates } from '../hooks/useCurrentCoordinates';
 import { InformationBarContainer } from '../components/InformationBar/InformationBarContainer';
 import { LocationData, CURRENT_LOCATION } from '../components/CurrentLocation';
-import { ClientOnly } from '../components/ClientOnly';
 
 export default function Home() {
     const {
@@ -16,7 +15,7 @@ export default function Home() {
         error: myCoordinatesError,
     } = useCurrentCoordinates();
     const { data, loading, error } = useQuery(CURRENT_LOCATION, {
-        // pollInterval: 5000,
+        pollInterval: 5000,
     });
 
     const currentLongitude =
@@ -50,12 +49,14 @@ export default function Home() {
                 </MapContainer>
 
                 <InformationBarContainer>
-                    <LocationData
-                        satelliteLatitude={parseFloat(currentLatitude)}
-                        satelliteLongitude={parseFloat(currentLongitude)}
-                        myLatitude={latitude}
-                        myLongitude={longitude}
-                    />
+                    {latitude && longitude && (
+                        <LocationData
+                            satelliteLatitude={parseFloat(currentLatitude)}
+                            satelliteLongitude={parseFloat(currentLongitude)}
+                            myLatitude={latitude}
+                            myLongitude={longitude}
+                        />
+                    )}
                 </InformationBarContainer>
             </main>
         </div>
